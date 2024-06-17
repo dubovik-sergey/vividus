@@ -137,10 +137,10 @@ class MobitruCapabilitiesAdjusterTests
         mobitruCapabilitiesConfigurer.setResignIosApp(DEFAULT_RESIGN_IOS_APP_VALUE);
         mobitruCapabilitiesConfigurer.setDoInjection(DEFAULT_INJECTION_APP_VALUE);
         var capabilities = new DesiredCapabilities(Map.of(udidCapabilityName, UDID));
-        when(mobitruFacade.takeDevice(capabilities)).thenReturn(UDID);
+        when(mobitruFacade.takeDevice(UDID)).thenReturn(UDID);
         var ordered = Mockito.inOrder(mobitruFacade);
         assertEquals(Map.of(), mobitruCapabilitiesConfigurer.getExtraCapabilities(capabilities));
-        ordered.verify(mobitruFacade).takeDevice(capabilities);
+        ordered.verify(mobitruFacade).takeDevice(UDID);
         ordered.verify(mobitruFacade).installApp(UDID, STEAM_APK,
                 DEFAULT_RESIGN_IOS_APP_VALUE, DEFAULT_INJECTION_APP_VALUE);
         verify(mobitruFacade, never()).returnDevice(UDID);
